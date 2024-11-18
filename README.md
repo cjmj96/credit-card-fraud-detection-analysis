@@ -2,33 +2,33 @@
 
 ## Background and overview
 
-SecureSwipe Solutions is a rapidly growing FinTech company providing
- payment processing services to online merchants and brick-and-mortar
- stores across Europe. Founded in 2020, the company has grown 
-exponentially, processing hundreds of thousands of monthly 
-transactions. However, with this growth, SecureSwipe has identified
- an alarming rise in fraudulent transactions, causing financial losses
- and damaging the company’s reputation among its merchant customers.
+
+Secure Swipe Solutions, founded in 2020, is dedicated to handling payments in virtual and physical 
+stores across Europe. Currently, it is experiencing exponential growth, handling hundreds of 
+thousands of transactions per month. The problem the company faces is the rapid increase in 
+fraudulent transactions that cause not only economic losses but also a loss of customer trust.
 
 
-The current fraud detection system at SecureSwipe relies on static rules and is 
-proving inadequate for identifying sophisticated fraud patterns. The company
- has observed that fraudsters are adapting their techniques faster than
- manual rule updates can keep up. This has resulted in false 
-positives (legitimate transactions flagged as fraudulent) and 
-false negatives (fraudulent transactions going undetected).
 
-To address these challenges, SecureSwipe’s leadership has decided
- to implement a more advanced, data-driven fraud detection system
- that uses machine learning techniques. They believe that by leveraging
- the vast amount of transaction data they have accumulated, they can
- create a more accurate and adaptable fraud detection model.
+The company uses a detection system based on static rules, which prove to be inadequate for 
+identifying sophisticated patterns for carrying out fraudulent transactions. Fraudsters find 
+new ways to beat the system in less time. This produces false positives (legitimate transactions 
+classified as fraudulent) and false negatives (fraudulent transactions classified as legitimate).
 
-This project analyzes transaction data to train a machine learning model,
- which will predict whether a transaction is fraudulent or legitimate.
 
-The dataset used is from real anonymized transactions made by users
- in Europe. You can find the data [here](https://www.kaggle.com/code/christianmontenegro/credit-card-fraud-detection).
+
+The company has decided to update the current system with a more advanced one that uses the data 
+collected by the company to train models based on machine learning techniques. The goal is to create 
+a more accurate and adaptable model.
+
+
+This project uses transaction data collected by the company to train a machine learning model, which will 
+classify transactions to determine if they are legitimate or fraudulent.
+
+
+The data used is real and comes from anonymized transactions made by users in Europe. Here are 
+the [data](https://www.kaggle.com/datasets/nelgiriyewithana/credit-card-fraud-detection-dataset-2023).
+
 
 ## Data structures and initial exploration
 
@@ -98,11 +98,9 @@ were 0.99, 1, 0.99, and 0.99, respectively. Another method to evaluate our model
 
 ### Interpretability
 
-The model includes interpretability capabilities by computing SHAP values. This led to the discovery that the most
- important feature, by far, for predicting whether a transaction is fraudulent or legitimate is ‘V14’ with an overall
- average SHAP value of 0.16, which is 112.5% ​​higher than the second most important feature, ‘V4’ with 0.08. It is important
- to note that the least important feature for the model’s objective prediction is the amount of money 
-transferred (‘Amount’). The following image illustrates this.
+SHAP allow us to discover the influence of features in the prediction process, this led to the discovery that the most
+important feature, by far, is V14 with a global average SHAP value of 0.17, which is 212.5% more than the second most important 
+feature, V4 with 0.08. It's important to note that the least important feature is the Amount feature. The following image illustrate this.
 
 ![Global-explanation-using-shap](./Global-explanation-using-shap.png)
 
@@ -115,47 +113,49 @@ At the individual predictive level, it allows us to understand a particular deci
 
 ## Recommendations and future steps
 
-Based on the knowledge gained about fraudulent and legitimate transaction patterns, by training a predictive
- model with generalization and interpretability capabilities, using gradient boosted decision trees (GBDT), 
-implemented in XGBoost, some practical recommendations are offered below:
 
-- Deploy model in production: Based on the results obtained, the model is robust enough to replace the 
-current static rules system. It is recommended to proceed with the implementation of the model at 
-the production level to improve fraud detection and reduce financial losses.
 
-- Optimize the customer interface based on interpretability: Create a clear and simple interface that
- explains the model’s decisions to merchants and customers. For example, if a transaction is classified
- as suspicious, the system should be able to explain the main reasons for such a classification using
- key features (such as ‘V14’) with understandable explanations. This is essential to maintain customer
- trust when a legitimate transaction is flagged as potentially fraudulent. Real-time notifications should
- also be implemented so that customers can immediately review transactions labeled as suspicious,
- and provide an efficient system for them to quickly confirm or refute the decision.
+Based on the knowledge acquired about the patterns of fraudulent and legitimate transactions, 
+when training a predictive model with generalization and interpretability capabilities, using 
+gradient-boosted decision trees (GBDT), implemented in XGBoost, the following practical recommendations are offered:
 
-- Provide support and feedback: Implement an active support system so that customers of payment
- processing companies can quickly report problems or concerns about the fraud detection system. This
- feedback can be valuable in improving both the model and the customer experience.
 
-- Monitor key metrics in production: Although the model has shown a high rate of accuracy and sensitivity,
- it is essential to continuously monitor its performance in production. Fraud threats evolve rapidly, so it is
- recommended to implement a monitoring system that tracks metrics such as the false positive and 
-negative rate, the rate of fraud detected, and financial losses avoided.
 
-- Retrain the model periodically: As more transaction data accumulates, it is important to retrain the 
-model regularly so that it continues to learn from new fraud patterns and does not become obsolete. A
- retraining cycle is recommended periodically, for example, every 3-6 months, or when key performance
- indicators deteriorate.
+- Implement the model in production: Based on the results obtained, the model is sufficiently 
+robust to replace the current static rule system.
 
-- Manually review important false negatives: Although the model shows high sensitivity, it is critical to
- have a dedicated team manually review transactions that are not flagged as suspicious by the model
- but are subsequently identified as fraudulent by clients or audit systems. These cases can provide 
-valuable feedback for fine-tuning the model.
 
-- Focus on key features: The analysis showed that feature ‘V14’ is the most relevant for fraud detection,
- with an overall average SHAP value of 0.17, markedly higher than the other features. A deeper analysis
- of what this feature represents and how its data collection or representation in the system can be
- improved is recommended. Furthermore, since the amount of money transferred (‘Amount’) was
- identified as the least important feature, the weight assigned to this variable in other decision systems could be reconsidered.
 
-- Explore new features: As SecureSwipe grows, it is important to explore the possibility of integrating
- new features that could further improve the model’s accuracy. This could include geographic data,
- user behavior patterns, or transaction times.
+- Optimize the interface with the client ensuring interpretability: Implement an interface that explains 
+decisions to customers. This is essential to maintain customer trust when a legitimate transaction 
+is marked as fraudulent.
+
+
+
+- Provide support and feedback: Implement an active support system so that customers of the companies 
+processing the payments can quickly report problems or questions about the fraud detection system. Feedback 
+would improve both the model and the customer experience.
+
+
+
+- Monitor key metrics in production: Although the model has demonstrated excellent performance, it is of utmost 
+importance to monitor it continuously in production. Fraud strategies evolve rapidly, which is why it is 
+necessary to monitor metrics such as the rate of false positives, false negatives, and avoided financial losses.
+
+
+
+- Retrain the model periodically: The model should be trained regularly to keep up with identifying new fraud 
+patterns. It should be retrained when key performance metrics begin to deteriorate significantly.
+
+
+
+- Manually review significant false negatives: Although the model shows high sensitivity, it is essential to 
+have a dedicated team that manually reviews the transactions that the model does not flag as suspicious but 
+that clients or audit systems later identify as fraudulent. These cases can provide valuable feedback to adjust the model.
+
+
+- Focus on the key features: The analysis showed that the feature V14 is the most relevant for fraud detection, 
+with a global average SHAP value of 0.17, markedly higher than the other features. It is recommended to conduct a 
+deeper analysis of what this feature represents and how its data collection or representation in the system can be 
+improved. Moreover, since the amount of money transferred ('Amount') was identified as the least important 
+characteristic, the weight assigned to this variable in other decision systems could be reconsidered.
